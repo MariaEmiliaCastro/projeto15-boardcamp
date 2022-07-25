@@ -17,7 +17,7 @@ const validateCustomersMiddleware = {
             next();
         }
     },
-    validateIfCustomerAlreadyExists: async (req, res, next) => {
+    validateIfCustomerCanBeRegistered: async (req, res, next) => {
         const customerCpf = res.locals.customerInfo.cpf;
 
         const query = await connection.query('SELECT * FROM customers WHERE cpf = $1', [customerCpf]);
@@ -28,7 +28,7 @@ const validateCustomersMiddleware = {
             next();
         }
     },
-    validateUpdateCustomer: async (req, res, next) => {
+    validateIfCustomerExists: async (req, res, next) => {
         const customerCpf = res.locals.customerInfo.cpf;
         const customerId = res.locals.customerId;
         const query = await connection.query('SELECT * FROM customers WHERE cpf = $1', [customerCpf]);
